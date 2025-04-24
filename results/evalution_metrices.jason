@@ -1,0 +1,16 @@
+import json
+from src.evaluation import compute_rmse, precision_at_k
+
+true = [4, 5, 3, 4]
+pred = [3.5, 4.7, 2.9, 4.1]
+
+recommendations = [(1, 4.7), (2, 3.8), (3, 4.2)]
+actual_ratings = {1: 5, 2: 4, 3: 2}
+
+metrics = {
+    "RMSE": compute_rmse(true, pred),
+    "Precision@3": precision_at_k(recommendations, actual_ratings, k=3)
+}
+
+with open("results/evaluation_metrics.json", "w") as f:
+    json.dump(metrics, f, indent=2)

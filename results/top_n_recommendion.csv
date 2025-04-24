@@ -1,0 +1,10 @@
+import pandas as pd
+from src.data_loader import load_data
+from src.recommender import UserBasedCF
+
+data = load_data("C:/Users/Admin/Downloads/ml-100k/")
+model = UserBasedCF(data)
+
+recommendations = model.recommend(user_id=1, n=10)
+df = pd.DataFrame(recommendations, columns=["item_id", "predicted_rating"])
+df.to_csv("results/top_n_recommendations.csv", index=False)
